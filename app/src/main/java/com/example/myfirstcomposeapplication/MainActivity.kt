@@ -4,8 +4,14 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material.Button
+import androidx.compose.material.Divider
+import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -51,17 +57,29 @@ fun Counter(count: Int, updateCount: (newCount: Int) -> Unit) {
 }
 
 @Composable
-fun MyScreenContent() {
+fun MyScreenContent(names: List<String> = List(1000) { "Alina & Arnold" }) {
     val count = remember {
         mutableStateOf(0)
     }
 
     Column {
-        Greeting(name = "Arnold")
-        Divider(color = Color.Black)
+        NameList(
+            names = names,
+            modifier = Modifier.weight(1f)
+        )
         Divider(color = Color.Transparent, thickness = 32.dp)
         Counter(count.value) {
             count.value = it
+        }
+    }
+}
+
+@Composable
+fun NameList(names: List<String>, modifier: Modifier = Modifier) {
+    LazyColumn(modifier = modifier) {
+        items(items = names) { name ->
+            Greeting(name = name)
+            Divider(color = Color.Black)
         }
     }
 }
