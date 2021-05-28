@@ -15,6 +15,7 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
@@ -117,6 +118,10 @@ fun AnotherScreenContent() {
             CustomTextField("User Name", "Input your name")
             Divider(color = Color.Transparent, thickness = 16.dp)
             CustomTextField("Password", "Input your password")
+            Divider(color = Color.Transparent, thickness = 32.dp)
+            CustomOutlinedTextField("User Name", "Input your name")
+            Divider(color = Color.Transparent, thickness = 16.dp)
+            CustomOutlinedTextField("Password", "Input your password")
         }
     }
 }
@@ -125,7 +130,6 @@ fun AnotherScreenContent() {
 private fun CustomTextField(label: String, placeHolderString: String) {
     val textState = remember { mutableStateOf("") }
     val focusedState = remember { mutableStateOf(false) }
-
 
     TextField(
         modifier = Modifier.border(
@@ -159,6 +163,27 @@ private fun CustomTextField(label: String, placeHolderString: String) {
             unfocusedBorderColor = Color.Transparent,
             disabledBorderColor = Color.Transparent,
             errorBorderColor = Color.Transparent
+        )
+    )
+}
+
+@Composable
+fun CustomOutlinedTextField(label: String, placeHolderString: String) {
+    val textState = remember { mutableStateOf("") }
+
+    OutlinedTextField(
+        value = textState.value,
+        onValueChange = { textState.value = it },
+        label = { Text(text = label) },
+        placeholder = { Text(text = placeHolderString) },
+        colors = TextFieldDefaults.outlinedTextFieldColors(
+            cursorColor = Color(0xff333F48),
+            focusedLabelColor = Color(0xff697684),
+            unfocusedLabelColor = Color(0xff697684),
+            textColor = Color(0xff333F48),
+            placeholderColor = Color(0xff697684),
+            focusedBorderColor = Color(0xff697684),
+            unfocusedBorderColor = Color(0xffd2d5da),
         )
     )
 }
