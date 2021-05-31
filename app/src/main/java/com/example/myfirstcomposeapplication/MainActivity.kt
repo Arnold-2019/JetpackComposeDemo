@@ -25,7 +25,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            AnotherScreenContent()
+            ScreenContent()
         }
     }
 }
@@ -33,11 +33,11 @@ class MainActivity : ComponentActivity() {
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-    AnotherScreenContent()
+    ScreenContent()
 }
 
 @Composable
-fun AnotherScreenContent() {
+fun ScreenContent() {
     Box(
         modifier = Modifier
             .padding(20.dp)
@@ -49,13 +49,13 @@ fun AnotherScreenContent() {
         ) {
             CustomTextField("User Name", "Input your name")
             Divider(color = Color.Transparent, thickness = 16.dp)
-            CustomTextField("Password", "Input your password")
+            CustomTextField("Email Address", "Input your email address")
 
             Divider(color = Color.Transparent, thickness = 32.dp)
 
             CustomOutlinedTextField("User Name", "Input your name")
             Divider(color = Color.Transparent, thickness = 16.dp)
-            CustomOutlinedTextField("Password", "Input your password")
+            CustomOutlinedTextField("Email Address", "Input your email address")
         }
     }
 }
@@ -64,6 +64,10 @@ fun AnotherScreenContent() {
 private fun CustomTextField(label: String, placeHolderString: String) {
     val textState = remember { mutableStateOf("") }
     val focusedState = remember { mutableStateOf(false) }
+
+    val textColor01 = Color(0xff333F48)
+    val textColor02 = Color(0xff697684)
+    val transparentColor = Color.Transparent
 
     TextField(
         modifier = Modifier.border(
@@ -88,15 +92,15 @@ private fun CustomTextField(label: String, placeHolderString: String) {
             fontSize = 16.sp
         ),
         colors = TextFieldDefaults.outlinedTextFieldColors(
-            cursorColor = Color(0xff333F48),
-            focusedLabelColor = Color(0xff697684),
-            unfocusedLabelColor = Color(0xff697684),
-            textColor = Color(0xff333F48),
-            placeholderColor = Color(0xff697684),
-            focusedBorderColor = Color.Transparent,
-            unfocusedBorderColor = Color.Transparent,
-            disabledBorderColor = Color.Transparent,
-            errorBorderColor = Color.Transparent
+            cursorColor = textColor01,
+            focusedLabelColor = textColor02,
+            unfocusedLabelColor = textColor02,
+            textColor = textColor01,
+            placeholderColor = textColor02,
+            focusedBorderColor = transparentColor,
+            unfocusedBorderColor = transparentColor,
+            disabledBorderColor = transparentColor,
+            errorBorderColor = transparentColor
         )
     )
 }
@@ -104,6 +108,10 @@ private fun CustomTextField(label: String, placeHolderString: String) {
 @Composable
 fun CustomOutlinedTextField(label: String, placeHolderString: String) {
     val textState = remember { mutableStateOf("") }
+
+    val textColor01 = Color(0xff333F48)
+    val textColor02 = Color(0xff697684)
+    val unfocusedBorderColor = Color(0xffd2d5da)
 
     OutlinedTextField(
         value = textState.value,
@@ -114,13 +122,13 @@ fun CustomOutlinedTextField(label: String, placeHolderString: String) {
         ),
         placeholder = { Text(text = placeHolderString) },
         colors = TextFieldDefaults.outlinedTextFieldColors(
-            cursorColor = Color(0xff333F48),
-            focusedLabelColor = Color(0xff697684),
-            unfocusedLabelColor = Color(0xff697684),
-            textColor = Color(0xff333F48),
-            placeholderColor = Color(0xff697684),
-            focusedBorderColor = Color(0xff697684),
-            unfocusedBorderColor = Color(0xffd2d5da),
+            cursorColor = textColor01,
+            focusedLabelColor = textColor02,
+            unfocusedLabelColor = textColor02,
+            textColor = textColor01,
+            placeholderColor = textColor02,
+            focusedBorderColor = textColor02,
+            unfocusedBorderColor = unfocusedBorderColor,
         )
     )
 }
